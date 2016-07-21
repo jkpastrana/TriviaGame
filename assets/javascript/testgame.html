@@ -31,7 +31,7 @@
 
 	<script type="text/javascript">
 		// $( document ).ready(function(){
-
+//setup var
 var correctAnswer =  0,
 	incorrectAnswer=  0,
 	unAnswerws=  0,
@@ -45,7 +45,7 @@ var correctAnswer =  0,
 	chB,
 	chC,
 	chD;
-
+//questions
 var triviaQuestions = [
 	["What is the color of the sky?","Blue","White","Sky blue", "Colorless","D"], 
 	["What is the largest ocean?","Artic", "Atlantic", "Indian", "Pacific","D"], 
@@ -56,18 +56,20 @@ var triviaQuestions = [
 	["What is the largest desert?","Arabian", "Gobi", "Antarctic Polar", "Sahara","C"], 
 	["What is the tallest mountain?","Mount Mckinley", "Mount Kilimanjaro", "Mount Everest", "Mount Elbrus","C"], 
 	["Which month does Summer end?","June", "July", "August", "September","C"], 
-	["What animale is also known has the Killer whale?","Sperm whale", "Humpback whale", "Blue whale", "Orca whale","C"], 
+	["What animal is also known has the Killer whale?","Sperm whale", "Humpback whale", "Blue whale", "Orca whale","C"], 
 	["Which country looks like a boot?","US", "Africa", "Mexico", "Italy","D"]
 	];
 
 
-
+//to display
 
 function _(x){
 
 	return document.getElementById(x);
 
 }
+
+//gets questions and display end game
 
 function renderQuestions(){
 
@@ -80,7 +82,7 @@ function renderQuestions(){
 		trivia.innerHTML += "<h2>Wrong: " + incorrectAnswer +"</h2><br>";
 		trivia.innerHTML += "<h2>Unanswered: " + unAnswerws +"</h2><br>";
 		_("questionNumber").innerHTML = "All Done!!";
-		pos = 0;
+		//pos = 0;
 		correctAnswer = 0;
 		incorrectAnswer = 0;
 		unAnswerws = 0;
@@ -88,15 +90,16 @@ function renderQuestions(){
 		console.log("correctAnswer");
 	}
 
-
+//question number
 	_("questionNumber").innerHTML = "Question: " + (pos + 1) + " of " + triviaQuestions.length;
+//question and choices
 	triviaQuestion = triviaQuestions [pos][0];
 	chA = triviaQuestions [pos][1];
 	chB = triviaQuestions [pos][2];
 	chC = triviaQuestions [pos][3];
 	chD = triviaQuestions [pos][4];
 	
-
+//radio buttons with vlues
 	trivia.innerHTML = "<h3>" + triviaQuestion + "</h3>";
 	trivia.innerHTML += "<input type='radio' name='choices' value='A'>"+chA+"<br>";
 	trivia.innerHTML += "<input type='radio' name='choices' value='B'>"+chB+"<br>";
@@ -106,6 +109,7 @@ function renderQuestions(){
 	console.log(correctAnswer);
 }
 
+//checks answers and updates counters
 function checkAnswer(){
 
 	choices = document.getElementsByName("choices");
@@ -141,9 +145,9 @@ function checkAnswer(){
 
 
 }
-
+//timer counts down and checks if zero
 var time = setInterval(function() { myTimer()}, 1000);
-var timeleft = 120;
+var timeleft = 90;
 
 function myTimer() {
 
@@ -152,6 +156,11 @@ function myTimer() {
   document.getElementById("timer").innerHTML = "<h2>Timer: "+ timeleft-- + " seconds left</h2>";;
 
   }
+  // else if(pos > 10){
+  // 	document.getElementById("timer").innerHTML = "<h2>Done!</h2>";
+  // 	console.log(pos)
+
+  // }
   else{
 
   	 document.getElementById("timer").innerHTML = "<h2>Timer: 0</h2>";
