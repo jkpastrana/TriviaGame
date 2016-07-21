@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Test game</title>
+	<style type="text/css">
+		
+		#trivia{
+
+			border: #000 1px solid;
+			padding: 10px 40px 40px 40px;
+			background-color: grey;
+			text-align: left;
+			margin-right: 400px;
+			margin-left: 400px;
+			margin-top: 50px;
+		}
+		body{
+
+			background-color: blue;
+		}
+		#timer{
+
+			margin-left: 500px;
+		}
+		#questionNumber{
+
+			margin-left: 525px;
+		}
+
+	</style>
+
+	<script type="text/javascript">
+		// $( document ).ready(function(){
+
+var correctAnswer =  0,
+	incorrectAnswer=  0,
+	unAnswerws=  0,
+	pos= 0,
+	trivia,
+	triviaQuestion,
+	choice,
+	choices,
+	test,
+	chA,
+	chB,
+	chC,
+	chD;
+
+var triviaQuestions = [
+	["What is the color of the sky?","Blue","White","Sky blue", "Colorless","D"], 
+	["What is the largest ocean?","Artic", "Atlantic", "Indian", "Pacific","D"], 
+	["What is the largest continent?","Africa", "Antarctica", "Asia", "North America","C"], 
+	["Which river does not run from the south to north?", "Nile", "Saint Johns", "Mississippi", "Little Bighorn","C"], 
+	["Where do penguins live?","North Pole", "South Pole", "Antarctica", "Southern Hemisphere","D"],
+	["What is the lagest Rain forest?","Amazon", "Congo", "Daintree", "Valdivian","A"],  
+	["What is the largest desert?","Arabian", "Gobi", "Antarctic Polar", "Sahara","C"], 
+	["What is the tallest mountain?","Mount Mckinley", "Mount Kilimanjaro", "Mount Everest", "Mount Elbrus","C"], 
+	["Which month does Summer end?","June", "July", "August", "September","C"], 
+	["What animale is also known has the Killer whale?","Sperm whale", "Humpback whale", "Blue whale", "Orca whale","C"], 
+	["Which country looks like a boot?","US", "Africa", "Mexico", "Italy","D"]
+	];
+
+
+
+
+function _(x){
+
+	return document.getElementById(x);
+
+}
+
+function renderQuestions(){
+
+	trivia = _("trivia");
+	if((pos >= triviaQuestions.length) || (timeleft<= 0)){
+
+		
+	
+		trivia.innerHTML = "<h2>Correct: " + correctAnswer + "</h2><br>";
+		trivia.innerHTML += "<h2>Wrong: " + incorrectAnswer +"</h2><br>";
+		trivia.innerHTML += "<h2>Unanswered: " + unAnswerws +"</h2><br>";
+		_("questionNumber").innerHTML = "All Done!!";
+		pos = 0;
+		correctAnswer = 0;
+		incorrectAnswer = 0;
+		unAnswerws = 0;
+		return false;
+		console.log("correctAnswer");
+	}
+
+
+	_("questionNumber").innerHTML = "Question: " + (pos + 1) + " of " + triviaQuestions.length;
+	triviaQuestion = triviaQuestions [pos][0];
+	chA = triviaQuestions [pos][1];
+	chB = triviaQuestions [pos][2];
+	chC = triviaQuestions [pos][3];
+	chD = triviaQuestions [pos][4];
+	
+
+	trivia.innerHTML = "<h3>" + triviaQuestion + "</h3>";
+	trivia.innerHTML += "<input type='radio' name='choices' value='A'>"+chA+"<br>";
+	trivia.innerHTML += "<input type='radio' name='choices' value='B'>"+chB+"<br>";
+	trivia.innerHTML += "<input type='radio' name='choices' value='C'>"+chC+"<br>";
+	trivia.innerHTML += "<input type='radio' name='choices' value='D'>"+chD+"<br>";
+	trivia.innerHTML += "<button onclick='checkAnswer()'>Submit Answer</button>";
+	console.log(correctAnswer);
+}
+
+function checkAnswer(){
+
+	choices = document.getElementsByName("choices");
+	for(var i= 0; i < choices.length; i++){
+
+		if(choices[i].checked){
+
+			choice = choices[i].value;
+		}
+	}
+
+	if(choice == triviaQuestions[pos][5]){
+
+		choice="";
+		correctAnswer ++;
+		console.log("correctAnswer");
+	}
+	
+	else if(choice == ""){
+
+		choice="";
+		unAnswerws ++;
+	}
+
+	else {
+
+		choice="";
+		incorrectAnswer ++;
+	}
+	pos ++;
+	renderQuestions();
+
+
+
+}
+
+var time = setInterval(function() { myTimer()}, 1000);
+var timeleft = 120;
+
+function myTimer() {
+
+  if (timeleft >=0){
+
+  document.getElementById("timer").innerHTML = "<h2>Timer: "+ timeleft-- + " seconds left</h2>";;
+
+  }
+  else{
+
+  	 document.getElementById("timer").innerHTML = "<h2>Timer: 0</h2>";
+  }
+
+}
+
+
+window.addEventListener("load", renderQuestions,false);
+
+
+
+
+		
+
+	</script>
+</head>
+<body>
+	<h2 id = "questionNumber"></h2>
+	<div id = "trivia"></div>
+	<h3 id = "timer"></h3>
+
+</body>
+</html>
